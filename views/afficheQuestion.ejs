@@ -1,0 +1,157 @@
+<%- include('pages/header'); -%>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+    
+      <!-- Navbar -->
+      <%- include('pages/navbar'); -%>
+      <!-- /.navbar -->
+    
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="home" class="brand-link">
+          <!-- <img src="/assets/img/wood.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-2"
+               style="opacity: .8"> -->
+            <img src="/assets/img/wood.svg" class="img-circle elevation-2" alt="User Image" style="width: 10%;">
+            <span class="brand-text font-weight-light">Barack-Quizz</span>
+        </a>
+    
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <%- include('pages/sidebar'); -%>
+          
+        <!-- /.sidebar -->
+      </aside>
+    
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Home</h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Mes quizz</li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+    
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+              
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Ma question</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form action="/modifquestion/<%= data.id %>" method="post">
+                      <div class="card-body">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Question</label>
+                          <input type="question" class="form-control" id="question" placeholder="Enter email" value="<%= data.question %>" name="question" required="required">
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <div class="form-group">
+                                <label>Temps</label>
+                                <select class="form-control" name="time" value="<%= data.time %>"  required="required">
+                                  <option value="5000">5</option>
+                                  <option value="10000">10</option>
+                                  <option value="15000">15</option>
+                                  <option value="20000">20</option>    
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <div class="form-group">
+                                <label>Selectionnez la reponse</label>
+                                <select class="form-control" name="point" value="<%= data.point %>" required="required">
+                                  <option value="1000">1000</option>
+                                  <option value="2000">2000</option>
+                                  <option value="3000">3000</option>
+                                  <option value="4000">4000</option>  
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">choix 1</label>
+                                <input type="text" class="form-control" id="premierChoix" placeholder="premier Choix" name="premierChoix" value="<%= data.premierChoix %>" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">choix 2</label>
+                                <input type="text" class="form-control" id="deuxiemeChoix" placeholder="deuxieme Choix" name="deuxiemeChoix" value="<%= data.deuxiemeChoix %>" required="required">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">choix 3</label>
+                              <input type="text" class="form-control" id="troisiemeChoix" placeholder="troisieme Choix" name="troisiemeChoix" value="<%= data.troisiemeChoix %>"  required="required">
+                          </div>
+                          <div class="form-group">
+                              <label for="exampleInputPassword1">choix 4</label>
+                              <input type="text" class="form-control" id="quatriemeChoix" placeholder="quatrieme Choix" name="quatriemeChoix" value="<%= data.quatriemeChoix %>" required="required">
+                          </div>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label>Selectionnez la reponse</label>
+                            <select class="form-control" name="reponse" value="<%= data.reponse %>" required="required">
+                              <option value="choix1">choix 1</option>
+                              <option value="choix2">choix 2</option>
+                              <option value="choix3">choix 3</option>
+                              <option value="choix4">choix 4</option> 
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+      
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+            </div>
+              <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+    
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+          <h5>Title</h5>
+          <p>Sidebar content</p>
+        </div>
+      </aside>
+      <!-- /.control-sidebar -->
+      
+    </div>
+<%- include('pages/footer'); -%>

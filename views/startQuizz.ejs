@@ -1,0 +1,194 @@
+<%- include('pages/header'); -%>          
+<body class="hold-transition sidebar-mini" >
+  <div class="wrapper">
+  
+    <!-- Navbar -->
+    <%- include('pages/navbar'); -%>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="home" class="brand-link">
+        <!-- <img src="/assets/img/wood.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-2"
+              style="opacity: .8"> -->
+          <img src="/assets/img/wood.svg" class="img-circle elevation-2" alt="User Image" style="width: 10%;">
+          <span class="brand-text font-weight-light">Barack-Quizz</span>
+      </a>
+  
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <%- include('pages/sidebar'); -%>
+        
+      <!-- /.sidebar -->
+    </aside>
+  
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Home</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active">Participation au quizz</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+  
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="card card-primary">
+                  <div class="card-header">
+                    <h2 id="test_status"></h2>
+                    
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  
+                </div>
+                
+          </div>
+         
+	
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-4">
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card" id="test">
+
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+            <!-- /.col-md-6 -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+      <div class="p-3">
+        <h5>Title</h5>
+        <p>Sidebar content</p>
+      </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    
+  </div>
+
+  <script  type="text/javascript">
+    var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0, idquestion, time = 5;
+    var questions = []
+    const reponseServer = []
+    var idQuizz = ""
+    var start
+    var compter 
+    
+    <% for(var i=0; i < data.length; i++) { %>
+      questions.push(["<%= data[i].question %>" , "<%= data[i].premierChoix %>", "<%= data[i].deuxiemeChoix %>", "<%= data[i].troisiemeChoix %>","<%= data[i].quatriemeChoix %>","<%= data[i].id %>", "<%= data[i].time %>" ])
+      idQuizz = "<%= data[i].quizz.id %>"
+      //console.log(idQuizz)
+    <% } %> 
+    function _(x) {
+      return document.getElementById(x);
+    }
+    function renderQuestion() {
+      test = _("test");
+      if (pos >= questions.length) {
+        let chose = "chose";
+        test.innerHTML = '<form action="/reponseQuizz/'+idQuizz+'"' +' method="post" id="executequizz"  name="executequizz" >' +'<input name="allReponse" id="allReponse" value='+JSON.stringify(reponseServer)+' type="HIDDEN"  readonly="readonly">'+  '</form>';
+         _("test_status").innerHTML = "FIN DE QUIZZ";
+        pos = 0;
+        correct = 0;
+        document.getElementById('executequizz').submit();
+        return false;
+      }
+      _("test_status").innerHTML = "Question " + (pos + 1) + " sur " + questions.length;
+      question = questions[pos][0];
+      chA = questions[pos][1];
+      chB = questions[pos][2];
+      chC = questions[pos][3];
+      chD = questions[pos][4];
+      idquestion = questions[pos][5];
+      time = questions[pos][6];
+      //console.log(time)
+      start = Date.now();
+
+      hmtl = "";
+      hmtl = "<h5 class='card-header'>" + question + "</h5><div class='card-body'>";
+      hmtl += '<div class="form-check"><input class="form-check-input" type="radio" name="choices" id="rep1" value="choix1"><label class="form-check-label" for="exampleRadios1">' + chA + '</label></div><br>';
+      hmtl += '<div class="form-check"><input class="form-check-input" type="radio" name="choices" id="rep2" value="choix2"><label class="form-check-label" for="exampleRadios2">' + chB + '<br></label></div><br>';
+      hmtl += '<div class="form-check"><input class="form-check-input" type="radio" name="choices" id="rep3" value="choix3"><label class="form-check-label" for="exampleRadios3">' + chC + '<br></label></div><br>';
+      hmtl += '<div class="form-check"><input class="form-check-input" type="radio" name="choices" id="rep4" value="choix4"><label class="form-check-label" for="exampleRadios4">' + chD + ' </label></div>';
+                    
+  
+      hmtl += '<br><br><div class="row"> <div class="col-md-4"></div><div class="col-md-4"><a onclick="checkAnswer()" id="suivant" type="submit" style="color:white" class="btn btn-primary">Suivant</a><br><br></div><div class="col-md-4"></div></div>';
+  
+      test.innerHTML = hmtl;
+      
+      compter = setTimeout(() => {
+         checkAnswer()
+         console.log("test dans le settimeout")
+      }, time);
+
+  
+    }
+   
+    function checkAnswer() {
+      choices = document.getElementsByName("choices");
+      for (var i = 0; i < choices.length; i++) {
+        if (choices[i].checked) {
+          choice = choices[i].value;
+          console.log(choice)
+        }
+        if(choice === undefined){
+          choice = "aucunchoix"
+        }
+      }
+      
+      var timeReponse =  Date.now() - start;
+      var timeplayer = Math.floor(timeReponse / 1000)
+      start = 0
+      reponseServer.push({"reponse":choice,"idQuestion":idquestion, "tempsReponse": timeplayer})
+      console.log(reponseServer)
+      if (choice == questions[pos][4]) {
+        correct++;
+      }
+      pos++;
+      time = 20;
+      clearTimeout(compter);
+      renderQuestion();
+      //console.log("le temps est de : "+time);
+    }
+    window.addEventListener("load", renderQuestion, false);
+  </script>
+
+<%- include('pages/footer'); -%>

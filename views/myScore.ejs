@@ -1,0 +1,147 @@
+<%- include('pages/header'); -%>          
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+  
+    <!-- Navbar -->
+    <%- include('pages/navbar'); -%>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="home" class="brand-link">
+        <!-- <img src="/assets/img/wood.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-2"
+              style="opacity: .8"> -->
+          <img src="/assets/img/wood.svg" class="img-circle elevation-2" alt="User Image" style="width: 10%;">
+          <span class="brand-text font-weight-light">Barack-Quizz</span>
+      </a>
+  
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <%- include('pages/sidebar'); -%>
+        
+      <!-- /.sidebar -->
+    </aside>
+  
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Mes scores</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="">Mes scores</a></li>
+                <li class="breadcrumb-item active">Participation au quizz</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+  
+      <!-- Main content -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <!-- /.col-md-6 -->
+          </div>
+          <div class="row">
+          <div class="col-12">
+            <% for(var i=0; i < data.length; i++) { %>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="far fa-chart-bar"></i>
+                  N°<%= data[i].quizz.id %> <%= data[i].quizz.titre %>  
+                </h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                      class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-success"><i class="fas fa-trophy"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-text">Mon score</span>
+                        <span class="info-box-number"><%= data[i].score %></span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                   
+                </div>
+                  <div class="col-md-4">
+                    <p><code>Nombre Bonne reponse : <%= data[i].nbBonneReponse %> / <%= data[i].nbquestion %></code></p>
+                    <div class="progress">
+                      <div class="progress-bar bg-primary progress-bar-striped active" role="progressbar"
+                      aria-valuenow="<%= data[i].nbBonneReponse %>" aria-valuemin="0" aria-valuemax="<%= data[i].nbquestion %>" >
+                      <%= data[i].nbBonneReponse %>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-success"><i class="far fa-hourglass"></i></span>
+        
+                      <div class="info-box-content">
+                        <span class="info-box-text">Temps Moyens Reponse</span>
+                        <span class="info-box-number"><%= data[i].tempsMoyenReponse %> secondes</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                   
+                </div>
+                  <!-- ./col -->
+                </div>
+                <!-- /.row -->
+                <!-- /.row -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <% } %>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+      <div class="p-3">
+        <h5>Title</h5>
+        <p>Sidebar content</p>
+      </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    
+  </div>
+
+  <script>
+    
+  </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<%- include('pages/footer'); -%>

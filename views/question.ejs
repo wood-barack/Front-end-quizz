@@ -1,0 +1,143 @@
+<%- include('pages/header'); -%>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+    
+      <!-- Navbar -->
+      <%- include('pages/navbar'); -%>
+      <!-- /.navbar -->
+    
+      <!-- Main Sidebar Container -->
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="home" class="brand-link">
+          <!-- <img src="/assets/img/wood.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-2"
+               style="opacity: .8"> -->
+            <img src="/assets/img/wood.svg" class="img-circle elevation-2" alt="User Image" style="width: 10%;">
+            <span class="brand-text font-weight-light">Barack-Quizz</span>
+        </a>
+    
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <%- include('pages/sidebar'); -%>
+          
+        <!-- /.sidebar -->
+      </aside>
+    
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Home</h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="">Home</a></li>
+                  <li class="breadcrumb-item active">Mes quizz</li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+    
+        <!-- Main content -->
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3">
+                <!-- <button type="button" href="/newQuestion/<%= id %>" class="btn btn-block btn-primary btn-lg">Nouvelle question</button> -->
+                <a href="/newQuestion/<%= id %>" class="btn btn-primary" id='<%= id %>'>Nouvelle question</a>
+              </div>
+              <form action="/linkquizz/<%= id %>" method="post">
+                <div class="col-md-6">
+                  <button type="submit" class="btn btn-primary">Code Quizz</button>
+                </div>
+              </form>
+              <div class="col-md-3">                
+                <input type="text" class="form-control" value="<%= myLink %>"  readonly="readonly">
+              </div>
+              <!-- <a href="/adminQuizz/<%= id %>/<%= room %>" class="btn btn-primary">Lancer le quizz</a> -->
+              <br>
+            </div>
+            <br>
+            <div class="row">  
+              <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                        <% for(var i=0; i < data.length; i++) { %>
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0"><%= data[i].question %> ?</h5>
+                                </div>
+                              <div class="card-body">
+                                <div class="row">
+
+                                  <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <button type="button" class="btn btn-danger">choix 1</button>
+                                        </div>
+                                        <input type="text" class="form-control" value="<%= data[i].premierChoix %>"  readonly="readonly">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <button type="button" class="btn btn-danger">choix 2</button>
+                                        </div>
+                                        <input type="text" class="form-control" value="<%= data[i].deuxiemeChoix %>"  readonly="readonly">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <button type="button" class="btn btn-danger">choix 3</button>
+                                        </div>
+                                        <input type="text" class="form-control" value="<%= data[i].troisiemeChoix %>"  readonly="readonly">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <button type="button" class="btn btn-danger">choix 4</button>
+                                        </div>
+                                        <input type="text" class="form-control" value="<%= data[i].quatriemeChoix %>"  readonly="readonly">
+                                    </div>
+                                  </div>
+                                </div>
+                                  <h6 class="card-title">Reponse :</h6>
+                                  <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-danger">Reponse</button>
+                                      </div>
+                                      <input type="text" class="form-control" value="<%= data[i].reponse %>"  readonly="readonly">
+                                  </div>
+                                  <a href="/AfficheQuestion/<%= data[i].id %>" class="btn btn-primary" id='<%= data[i].id %>'>Modifier</a>
+                              </div>
+                            </div>
+                        <% } %>
+                </div>
+                <div class="col-lg-3"></div>
+              </div>
+              <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+    
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+          <h5>Title</h5>
+          <p>Sidebar content</p>
+        </div>
+      </aside>
+      <!-- /.control-sidebar -->
+      
+    </div>
+    
+
+<%- include('pages/footer'); -%>
